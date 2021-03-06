@@ -1,0 +1,70 @@
+{
+	"name":"Unsre Wohnung",
+	"scale": 0.35,
+	"recommendedGuests": "8-12",
+	"userDiameter": 80,
+	"image":"image.png",
+	"overlay":"overlay.png",
+	"size":{"width" : 1025, "height": 912},
+	"rooms" : {
+		"0": {
+			"leftTop": {"x":2, "y":627},
+			"rightBottom": {"x":327, "y":906},
+			"properties": ["LOBBY"]
+		},
+		"1": {
+			"leftTop": {"x":306, "y":342},
+			"rightBottom": {"x":1019, "y":905}
+		},
+		"2": {
+			"leftTop": {"x":2, "y":342},
+			"rightBottom": {"x":325,"y": 647},
+			"properties": ["TOILET", "NO_VIDEO_CHAT"]
+		},
+		"3": {
+			"leftTop": {"x":2, "y":2},
+			"rightBottom": {"x":506, "y":361}
+		},
+		"4": {
+			"leftTop": {"x":487, "y":2},
+			"rightBottom": {"x":882, "y":361}
+		},
+		"5": {
+			"leftTop": {"x":862, "y":2},
+			"rightBottom": {"x":1020, "y":361},
+			"properties": ["DRINKS", "FOOD", "NO_VIDEO_CHAT"]
+		}
+	},
+	"doors" : {
+		"0": {
+			"point1": {"x":302, "y":695},
+			"point2": {"x":330, "y":817},
+			"room1": 0,
+			"room2": 1
+		},
+		"1": {
+			"point1": {"x":302, "y":438},
+			"point2": {"x":330, "y":562},
+			"room1": 1,
+			"room2": 2
+		},
+		"2": {
+			"point1": {"x":350, "y":337},
+			"point2": {"x":472, "y":367},
+			"room1": 1,
+			"room2": 3
+		},
+		"3": {
+			"point1": {"x":538, "y":337},
+			"point2": {"x":658, "y":367},
+			"room1": 1,
+			"room2": 4
+		},
+		"4": {
+			"point1": {"x":857, "y":83},
+			"point2": {"x":887, "y":205},
+			"room1": 4,
+			"room2": 5
+		}
+	}
+}

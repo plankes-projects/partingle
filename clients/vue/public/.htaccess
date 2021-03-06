@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteRule ^jitsi/roomId/.*$ jitsi/jitsi.html
+RewriteRule jitsi/jitsi.html$ - [L]

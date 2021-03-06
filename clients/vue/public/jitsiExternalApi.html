@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+    <head>
+		<style>
+			body {
+			  margin: 0;
+			  padding: 0;
+			}
+			html, 
+			body {
+				height: 100%;
+			}
+		</style>
+		<script src='https://meet.jit.si/external_api.js'></script>
+		<script>
+			function init(){
+				var queryDict = {};
+				location.search.substr(1).split("&").forEach(function(item) {
+					queryDict[item.split("=")[0]] = item.split("=")[1]
+				});
+				
+				const domain = 'meet.jit.si';
+				const options = {
+					roomName: queryDict.room,
+					userInfo: {
+						displayName: '.'
+					},
+					parentNode: document.querySelector('.meet'),
+					configOverwrite: { 
+						prejoinPageEnabled: false,
+						enableWelcomePage: false,
+						enableNoAudioDetection: false,
+						enableNoisyMicDetection: false
+					},
+					interfaceConfigOverwrite: { 
+						TOOLBAR_BUTTONS: ['microphone', 'camera', 'videoquality', 'fullscreen', 'shortcuts', 'desktop'], TOOLBAR_ALWAYS_VISIBLE: false, 
+						SHOW_CHROME_EXTENSION_BANNER: false
+					},
+				};
+				const api = new JitsiMeetExternalAPI(domain, options);
+				api.executeCommand('subject', ' ');
+			}
+		</script>
+	</head>
+	<body class="meet" onload='init()'>
+	</body>
+</html>

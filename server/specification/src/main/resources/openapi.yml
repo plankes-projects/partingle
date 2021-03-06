@@ -1,0 +1,347 @@
+openapi: 3.0.0
+info:
+  title: My API
+  description: API for the app.
+  version: 0.0.1
+
+servers:
+  - url: https://localhost
+    description: This server
+  - url: http://localhost:8081
+    description: This server with http. This is used during development.
+
+paths:
+  /ping:
+    get:
+      tags:
+        - "General"
+      summary: Returns pong.
+      responses:
+        '200':    # status code
+          description: Pong is returned.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example:   # Sample object
+                pong
+  /version:
+    get:
+      tags:
+        - "General"
+      summary: Returns the version of the API endpoint.
+      responses:
+        '200':    # status code
+          description: Pong is returned.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example:   # Sample object
+                2.0.1
+
+  /house/join:
+    get:
+      tags:
+        - "House"
+      summary:  Join a house.
+      parameters:
+        - in: query
+          name: joinToken
+          required: true
+          schema:
+            type: string
+          description: The id of the invite.
+      responses:
+        '200':    # status code
+          description: Successful call
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/initialData'
+
+  /house/create:
+    get:
+      tags:
+        - "House"
+      summary:  Create a new house.
+      parameters:
+        - in: query
+          name: houseId
+          required: true
+          schema:
+            type: integer
+          description: The id of the house layout to create.
+        - in: query
+          name: numOfRooms
+          required: true
+          schema:
+            type: integer
+            maximum: 100
+          description: The server will generate this amount of rooms.
+      responses:
+        '200':    # status code
+          description: Successful call
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/initialData'
+
+  /house/recover:
+    get:
+      tags:
+        - "House"
+      summary:  Used to recover a house in case the admin computer died.
+      parameters:
+        - in: query
+          name: recoverToken
+          required: true
+          schema:
+            type: string
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+      responses:
+        '200':    # status code
+          description: Successful call
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/initialData'
+
+  /house/accept:
+    get:
+      tags:
+        - "House"
+      summary:  Open the door for the new user.
+      parameters:
+        - in: query
+          name: token
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user who triggres this action.
+        - in: query
+          name: targetUserUuid
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user this action is applied on.
+      responses:
+        '200':    # status code
+          description: Successful call
+
+  /house/kick:
+    get:
+      tags:
+        - "House"
+      summary:  Kicks a user from the house.
+      parameters:
+        - in: query
+          name: token
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user who triggres this action.
+        - in: query
+          name: targetUserUuid
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user this action is applied on.
+      responses:
+        '200':    # status code
+          description: Successful call
+
+  /house/resetInviteLink:
+    get:
+      tags:
+        - "House"
+      summary:  Restes the inviteToken of a house. You get the new token as response and it is also present in the sync call.
+      parameters:
+        - in: query
+          name: token
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user who triggres this action.
+      responses:
+        '200':    # status code
+          description: The.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example:  ea759244-e88e-41e6-ada9-2904c33445fd
+
+  /house/giveAdmin:
+    get:
+      tags:
+        - "House"
+      summary:  Makes a user to an admin.
+      parameters:
+        - in: query
+          name: token
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user who triggres this action.
+        - in: query
+          name: targetUserUuid
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user this action is applied on.
+      responses:
+        '200':    # status code
+          description: Successful call
+
+  /house/removeAdmin:
+    get:
+      tags:
+        - "House"
+      summary:  Remove admin privileges from a user.
+      parameters:
+        - in: query
+          name: token
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user who triggres this action.
+        - in: query
+          name: targetUserUuid
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user this action is applied on.
+      responses:
+        '200':    # status code
+          description: Successful call
+
+  /house/sync:
+    post:
+      tags:
+        - "House"
+      summary:  Sends own user info and retrieves all user information of the house if possible.
+      parameters:
+        - in: query
+          name: token
+          required: true
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          schema:
+            type: string
+          description: The token of the user who triggres this action.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':    # status code
+          description: Successful call
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/house'
+
+components:
+  schemas:
+    house:
+      type: object
+      properties:
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/room'
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+        houseId:
+          type: integer
+          nullable: false
+          description: This defined the used house layout.
+        joinToken:
+          type: string
+          nullable: false
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+
+    room:
+      description: The room id and the room token. The room token is used for the conference call.
+      type: object
+      properties:
+        roomId:
+          type: integer
+          nullable: false
+        token:
+          type: string
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          nullable: false
+
+    user:
+      description: All data needed to sync a user with other users.
+      type: object
+      properties:
+        accepted:
+          type: boolean
+          description: Flag to mark if the user is accepted to the house or not.
+        admin:
+          type: boolean
+          description: Flag to mark if the user is a admin.
+        superAdmin:
+          type: boolean
+          description: Flag to mark if the user is a super admin / the house creater.
+        genericClientData:
+          type: string
+          maxLength: 10000
+          description: A json with client generic data. eg. we can send avatar data in here.
+        uuid:
+          type: string
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          nullable: false
+          description: The uuid of the user.
+        location:
+          $ref: '#/components/schemas/location'
+
+    location:
+      nullable: false
+      type: object
+      properties:
+        roomId:
+          type: integer
+          nullable: false
+          description: The room the user is in.
+        x:
+          type: number
+          nullable: false
+          description: x-achsis.
+        y:
+          type: number
+          nullable: false
+          description: y-achsis.
+
+    initialData:
+      type: object
+      properties:
+        userToken:
+          type: string
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          nullable: false
+          description: The token of the user.
+        userUuid:
+          type: string
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          nullable: false
+          description: The uuid of the user.
+        houseRecoverToken:
+          type: string
+          example:  ea759244-e88e-41e6-ada9-2904c33445fd
+          description: This will be set on a create call. You can use this token to login as admin in case you lose your client.
