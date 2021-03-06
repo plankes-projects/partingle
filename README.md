@@ -4,7 +4,7 @@ Website: https://d1n598x054kygy.cloudfront.net/
 
 # Hosting
 ### High availablility and unlimited scaling 
-High availablility with unlimited scaling can be achieved with following setup for ~70$/month.
+High availablility with unlimited scaling can be achieved with following setup for ~90$/month.
 * Client hosting: AWS Amplify
 * Backend hosting: AWS Elastic Beanstalk
 * DB: AWS Aurora MySQL
