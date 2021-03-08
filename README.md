@@ -15,4 +15,4 @@ Private use is much cheaper and can be handled by the cheapest server you find s
 # Getting Started
 The project consists of 2 parts:
 * Java Spring server which connects to a MySQL database. See server readme for more information.
-* TypeScript Vue PWA client. See client readme for more information.
+* TypeScript Vue client. See client readme for more information.
