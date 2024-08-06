@@ -2,8 +2,6 @@
 
 Website: https://d1n598x054kygy.cloudfront.net/
 
-Demo: https://partingle.epicnerf.com/#/host
-
 # Hosting
 ### High availablility and unlimited scaling 
 High availablility with unlimited scaling can be achieved with following setup for ~90$/month.
